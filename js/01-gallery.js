@@ -25,8 +25,7 @@ function onAddItemsClick(evt) {
   evt.preventDefault();
     const itemSrc = evt.target.dataset.source;
   const instance = basicLightbox.create(`
-    <img src="${itemSrc}" width="800" height="600">`,
-    { onClose: (instance) => { console.log('Close'); galleryRef.addEventListener('click', onAddItemsClick); } });
+    <img src="${itemSrc}" width="800" height="600">`);
   instance.show((instance) => {
     document.onkeydown = function (evt) {
       evt = evt || window.event;
