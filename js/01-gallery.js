@@ -1,5 +1,4 @@
 import { galleryItems } from './gallery-items.js';
-// Change code below this line
 
 const galleryRef = document.querySelector('.gallery');
 
@@ -21,23 +20,24 @@ function createGalleryset(items =[]) {
 </div>`).join("");
 }
 
-function onAddItemsClick(evt) {
-  evt.preventDefault();
-    const itemSrc = evt.target.dataset.source;
-  const instance = basicLightbox.create(`
-    <img src="${itemSrc}" width="800" height="600">`);
-  instance.show((instance) => {
-    document.onkeydown = function (evt) {
-      evt = evt || window.event;
-      var isEscape = false;
-      if ("key" in evt) {
-        isEscape = (evt.key === "Escape" || evt.key === "Esc");
-      } else {
-        isEscape = (evt.keyCode === 27);
-      }
-      if (isEscape) {
-        instance.close();
-      }
-    };
-  });
+
+function onAddItemsClick(e) {
+  e.preventDefault();
+  if (!e.target.classList.contains('gallery__image')) return;
+    const itemSrc = e.target.dataset.source;
+  const modalImageBox = basicLightbox.create(`
+    // <img src="${itemSrc}" width="800" height="600">`,
+    {
+      onShow: () => window.addEventListener('keydown', onEscapeClick),
+      onClose: () => window.removeEventListener('keydown', onEscapeClick),
+    }
+  );
+  const onEscapeClick = (e) => {
+  if (e.key === 'Escape') modalImageBox.close();
+  };
+  modalImageBox.show();
 }
+
+
+
+
