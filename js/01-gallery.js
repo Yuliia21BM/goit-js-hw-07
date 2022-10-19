@@ -28,8 +28,8 @@ function onAddItemsClick(e) {
   const modalImageBox = basicLightbox.create(`
     // <img src="${itemSrc}" width="800" height="600">`,
     {
-      onShow: () => window.addEventListener('keydown', onEscapeClick),
-      onClose: () => window.removeEventListener('keydown', onEscapeClick),
+      onShow: () => document.addEventListener('keydown', onEscapeClick),
+      onClose: () => document.removeEventListener('keydown', onEscapeClick),
     }
   );
   const onEscapeClick = (e) => {
